@@ -1,0 +1,86 @@
+﻿table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 5px 5px 5px 5px;
+    align: center;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    align-content:center;
+    min-width: 50px;
+    max-width: 400px;
+}
+
+
+.form_container {
+    width: 500px;
+    margin: 100px auto 0 auto;
+    border-radius: 5px;
+    background-color: green;
+    padding: 20px 50px 20px 50px;
+}
+
+.form_label {
+    clear: both;
+    color: white;
+}
+
+.subform {
+    width: 400px;
+    margin: 20px auto 0 auto;
+    border-radius: 5px;
+    background-color: #333333;
+    padding: 10px 25px 10px 25px;
+}
+
+.subform > textarea[readonly] {
+    width: 350px;
+    box-sizing: border-box;
+    margin: 0 auto 0 auto;
+    resize: vertical;
+    color: white;
+    padding: 0;
+    border: none;
+    background-color: #444444;
+}
+
+form input[type="text"], input[type="number"]{
+    width: 400px;
+    clear: both;
+    margin: 0px auto 10px auto;
+}
+
+form input[type="submit"] {
+    width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.data_table {
+    margin: 25px auto 0 auto;
+}
+
+.form_container h1, h2, h3, h4, h5, h6 {
+    color: white;
+    margin: 0px auto 0 auto;
+}
+
+.form_container textarea {
+    width: 400px;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+table .btn {
+    margin: 10px 10px 10px 10px;
+}
+
+.gene_selector {
+    width: 400px;
+    margin-bottom: 15px;
+}
