@@ -29,12 +29,12 @@ if($mysqli->connect_error){
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"> Genome Mapping</a>
+            <a class="navbar-brand" href="#">User Database</a>
             <ul id="navigation" class="nav navbar-nav navbar-right">
                 <li><a href="users.php">Create an Account</a></li>
-                <li><a href="diseases.php">Diseases</a></li>
+            <!--    <li><a href="diseases.php">Diseases</a></li>
                 <li><a href="genes.php">Genes</a></li>
-                <li><a href="drugs.php">Drugs</a></li>
+                <li><a href="drugs.php">Drugs</a></li> -->
             </ul>
         </div>
     </nav>
