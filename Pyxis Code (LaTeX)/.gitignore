@@ -1,0 +1,5 @@
+# PDF files
+*.pdf
+
+# Database information
+storedInfo.php
