@@ -32,9 +32,7 @@ if($mysqli->connect_error){
             <a class="navbar-brand" href="#">User Database</a>
             <ul id="navigation" class="nav navbar-nav navbar-right">
                 <li><a href="users.php">Create an Account</a></li>
-            <!--    <li><a href="diseases.php">Diseases</a></li>
-                <li><a href="genes.php">Genes</a></li>
-                <li><a href="drugs.php">Drugs</a></li> -->
+            	    <li><a href="reporting.php">Reporting</a></li>
             </ul>
         </div>
     </nav>
