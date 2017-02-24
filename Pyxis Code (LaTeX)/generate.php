@@ -5,8 +5,50 @@ ini_set('display_errors', 'On');
 // Database info
 include 'storedInfo.php';
 // Award info
-include 'award.php';
+# include 'award.php';
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pyxis Recognition Awards</title>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+</head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: rgba(4, 118, 155, 0.95);
+}
+</style>
+<body>
+
+<?php
 $mysqli = new mysqli("oniddb.cws.oregonstate.edu","channa-db",$myPassword,"channa-db");
 
 // Connect to database
@@ -73,7 +115,8 @@ $award_replace = $recipientFName . ' ' . $recipientLName;
 $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 
 $award_temp = "*[Award Date]*";
-$award_replace = $awardCreationTime;
+$convertedDate = DateTime::createFromFormat('Y-m-d H:i:s', $awardCreationTime);
+$award_replace = $convertedDate->format('F j, Y');
 $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 
 $award_temp = "*[Authorizing User]*";
@@ -88,16 +131,39 @@ file_put_contents($temp_file, $file_contents);
 
 chmod($temp_file,0755);
 
-$output = shell_exec('./convert ' . $awardID . ' ' . $temp_file . ' 2>&1');
+$output = shell_exec('./convert ' . $awardID . ' 2>&1');
 
 // echo "<p>$output</p>";
 
-$url = "http://web.engr.oregonstate.edu/~channa/Pyxis%20Code/certificates/";
+$url = "http://web.engr.oregonstate.edu/~channa/pyxis/certificates/";
 $url .= $awardID . '.pdf';
 
 $redirect = '<script type="text/javascript">';
 $redirect .= 'window.location = "' . $url . '"';
 $redirect .= '</script>';
 
-echo $redirect;
+echo '<form id="email-award-form" action="email_award.php" method="post">
+    <input type="submit" value="Email Award" />
+    <input type="hidden" name="award_type" value="' . $awardType . '" />
+    <input type="hidden" name="award_id" value="' . $awardID . '" />
+    <input type="hidden" name="recipient_first_name" value="' . $recipientFName . '" />
+    <input type="hidden" name="recipient_last_name" value="' . $recipientLName . '" />
+    <input type="hidden" name="recipient_email" value="' . $recipientEmail . '" />
+	</form>';
+
+echo '<div id="form-messages"></div>';
+
+echo '<div class="pdf-container">
+		<object width="100%" height="800px" data="'. $url . '">
+		<div class="fallback">
+			<p>The browser you are currently using does not support PDFs.</p>
+			<p>Please download the PDF to view it.</p>
+			<a href="'. $url . '">Download PDF</a>
+		</div>
+		</div></object>';
+
+// echo $redirect;
 ?>
+
+</body>
+</html>

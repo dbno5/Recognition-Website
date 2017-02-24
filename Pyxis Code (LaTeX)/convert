@@ -1,8 +1,16 @@
 #!/bin/bash
-echo $1 $2
+echo $1
+
+# .bashrc
 PATH=/bin:/sbin:/usr/local/bin:/usr/bin:/usr/local/apps/bin
 
-pdflatex -jobname=$1 -output-directory=certificates $2
+# $1 is award ID
+pdflatex -jobname=$1 -output-directory=certificates $1.tex
+
+# Change permissions for PDF
 chmod 0755 certificates/$1.pdf
+
+# Remove temporary files
+rm -f $1.tex
 rm -f certificates/$1.aux
 rm -f certificates/$1.log
