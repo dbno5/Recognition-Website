@@ -3,7 +3,7 @@
 	$address = '"exportcsv.php"';
 
 ini_set('display_errors', 'On');
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","jib-db","jHLU2F6vTofAqsoU","jib-db");
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq8","hernandv-db");
 
 $query = htmlspecialchars($_GET["query"]);
 
