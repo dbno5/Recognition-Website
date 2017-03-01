@@ -14,7 +14,7 @@ if($mysqli->connect_error){
 <head>
     <meta charset="utf-8">
     <title>
-        <?php echo $pageTitle  ?>
+	<?php echo $pageTitle ?>
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,8 @@ if($mysqli->connect_error){
         <div class="container-fluid">
             <a class="navbar-brand" href="#">User Database</a>
             <ul id="navigation" class="nav navbar-nav navbar-right">
-                <li><a href="users.php">Create an Account</a></li>
+                <li><a href="users.php">Account Management</a></li>
+            	    <li><a href="export.php">Export a query as CSV</a></li>
             	    <li><a href="reporting.php">Reporting</a></li>
             </ul>
         </div>
@@ -39,5 +40,4 @@ if($mysqli->connect_error){
 </head>
 
 <body>
-
-    <div class="main-container">
+<div class="main-container">
