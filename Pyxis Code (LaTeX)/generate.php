@@ -13,39 +13,21 @@ include 'storedInfo.php';
 <head>
     <meta charset="utf-8">
     <title>Pyxis Recognition Awards</title>
-	<link rel="stylesheet" type="text/css" href="styles.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="script.js"></script>
+    <!-- jQuery -->
+    <script
+    src="http://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="navbar.css" />
+	
+	<script src="email_script.js"></script>
 </head>
-<style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: rgba(4, 118, 155, 0.95);
-}
-</style>
 <body>
 
 <?php
@@ -59,15 +41,19 @@ if ($mysqli->connect_errno) {
 if (!($stmt = $mysqli->prepare("SELECT AwardID, Type, FName, LName, Email, AwardCreationTime, FK_UserID FROM Award WHERE AwardID = ?"))) {
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if(!($stmt->bind_param("i", $_GET['id']))) {
 	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if (!$stmt->execute()) {
 	echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if (!$stmt->bind_result($awardID, $awardType, $recipientFName, $recipientLName, $recipientEmail, $awardCreationTime, $creatorUserID)) {
 	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 $stmt->fetch();
 $stmt->close();
 
@@ -82,15 +68,19 @@ $stmt->close();
 if (!($stmt = $mysqli->prepare("SELECT FName, LName, JobTitle FROM Users WHERE UserID = ?"))) {
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if(!($stmt->bind_param("i", $creatorUserID))) {
 	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if (!$stmt->execute()) {
 	echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 if (!$stmt->bind_result($userFName, $userLName, $userJobTitle)) {
 	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
+
 $stmt->fetch();
 $stmt->close();
 
@@ -138,12 +128,10 @@ $output = shell_exec('./convert ' . $awardID . ' 2>&1');
 $url = "http://web.engr.oregonstate.edu/~channa/pyxis/certificates/";
 $url .= $awardID . '.pdf';
 
-$redirect = '<script type="text/javascript">';
-$redirect .= 'window.location = "' . $url . '"';
-$redirect .= '</script>';
-
 echo '<form id="email-award-form" action="email_award.php" method="post">
-    <input type="submit" value="Email Award" />
+    <button type="submit" class="btn btn-default">
+      <span class="glyphicon glyphicon-envelope"></span> Email Award
+    </button>
     <input type="hidden" name="award_type" value="' . $awardType . '" />
     <input type="hidden" name="award_id" value="' . $awardID . '" />
     <input type="hidden" name="recipient_first_name" value="' . $recipientFName . '" />
@@ -151,7 +139,7 @@ echo '<form id="email-award-form" action="email_award.php" method="post">
     <input type="hidden" name="recipient_email" value="' . $recipientEmail . '" />
 	</form>';
 
-echo '<div id="form-messages"></div>';
+echo '<div id="email-message"></div>';
 
 echo '<div class="pdf-container">
 		<object width="100%" height="800px" data="'. $url . '">
@@ -161,8 +149,6 @@ echo '<div class="pdf-container">
 			<a href="'. $url . '">Download PDF</a>
 		</div>
 		</div></object>';
-
-// echo $redirect;
 ?>
 
 </body>

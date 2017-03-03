@@ -1,10 +1,10 @@
-body{
-	/* Setting default text color, background and a font stack */
+/* body{
+	/* Setting default text color, background and a font stack
 	font-size:0.825em;
 	color:#eee;
 	background:url("bg.png") repeat-x #222222;
 	font-family:Arial, Helvetica, sans-serif;
-}
+}*/
 
 .CSSTableGenerator {
 margin:auto;padding:0px;

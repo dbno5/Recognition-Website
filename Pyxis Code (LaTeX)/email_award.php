@@ -33,8 +33,8 @@ Congratulations and best wishes for your continued success,
 Pyxis';
 
 if(!$mail->send()) {
-    echo 'Message could not be sent.';
+    echo 'Email could not be sent.';
     echo 'Mailer Error: ' . $mail->ErrorInfo;
 } else {
-    echo 'Message has been sent';
+    echo 'Email has been sent.';
 }
