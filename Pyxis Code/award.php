@@ -12,64 +12,66 @@
 <head>
     <meta charset="utf-8">
     <title>Pyxis Recognition Awards</title>
-	<link rel="stylesheet" type="text/css" href="TableCSSCode.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="signature.js"></script>
 
 </head>
-<style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
 
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: rgba(4, 118, 155, 0.95);
-}
-</style>
 <body>
-			<div id="menu">
-				<ul>
-					<li><a  href="member.php" title="">Home</a></li>
-					<li><a  href="user.php" title="">Edit User Details</a></li>
-					<li><a  href="award.php"  title="">Create Award</a></li>
-					<li><a  href="logout.php" title="">Logout</a></li>
-				</ul>
-			</div>
-	
-<h2> 
- 
-Create an award by entering the recipient's name, email address, type of award and date awarded.
- 
-</h2>
-		<form action="award.php" method="post">
-			Type of Award: <select name="Type">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" >Pyxis Recognition</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="member.php">Home</a></li>
+      <li><a href="user.php">User Details</a></li>
+      <li><a href="award.php">Create Award</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h2>Create Award</h2>
+  <p>Create an award by entering the recipient's name, email address, type of award and date awarded.</p>
+  <form class="form-inline" action="award.php" method="post">
+    
+    <div class="form-group">
+    <select id="lunch" class="selectpicker form-control" data-live-search="true" name="Type">
                 <option value="month">Employee of the Month</option>
                 <option value="week">Employee of the Week</option>
-        	</select>
-			First Name: <input type="text" name="FName">
-			Last Name: <input type="text" name="LName">
-			Email: <input type="email" name="Email">
-			Time and Date: <input type="datetime-local" name="AwardCreationTime">
-			<input type="submit" value="Submit Award">
-		</form>
+    </select> 
+    </div>
+    
+    <div class="form-group">
+      <label for="FName">First Name:</label>
+      <input type="text" class="form-control" id="FName" placeholder="Enter First Name" name="FName">
+    </div>
+    <div class="form-group">
+      <label for="LName">Last Name:</label>
+      <input type="text" class="form-control" id="LName" placeholder="Enter Last Name" name="LName">
+    </div>
+    <div class="form-group">
+      <label for="Email">Email:</label>
+      <input type="email" class="form-control" id="Email" placeholder="Enter Email" name="Email">
+    </div>
+    <div class="form-group">
+      <label for="AwardCreationTime">Date Awarded:</label>
+      <input type="datetime-local" class="form-control" id="AwardCreationTime" name="AwardCreationTime">
+    </div>
+    <button type="submit" class="btn btn-default">Update</button>
+  </form>
+</div>
+
 
 
 <?php
@@ -92,7 +94,7 @@ $AwardCreationTime=(isset($_POST['AwardCreationTime']) ? $_POST['AwardCreationTi
 if(!$mysqli || $mysqli->connect_errno){
 	echo "Connection error " .$mysqli->connect_errno ."".$mysqli->connect_error;
 }else{
-	echo "Award Submitted!!!";
+	echo "";
 }
 
 if(!$mysqli->query("INSERT INTO Award(Type, FName, LName, Email, AwardCreationTime, FK_UserID) VALUES ('$Type','$FName', '$LName', '$Email', '$AwardCreationTime',(SELECT UserID FROM Users WHERE Username = '$Username'))")){
@@ -119,8 +121,8 @@ if (!$stmt->bind_result($out_Type, $out_FName, $out_LName, $out_Email, $out_Awar
 
 $result = mysqli_query($con,"SELECT * FROM Award WHERE FK_UserID = (SELECT UserID FROM Users WHERE Username = '$Username') ORDER BY AwardID DESC");
 
-echo "<div class='CSSTableGenerator'>";
-echo "<table>"; 
+echo "<div class='container'>";
+echo "<table class='table table-bordered'>"; 
 echo "<tr><td>Award Id</td><td>Award Type</td><td>First Name</td><td>Last Name</td><td>Email</td><td>Date Awarded</td><td>Given By UserID</td></tr>";
 
 while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
