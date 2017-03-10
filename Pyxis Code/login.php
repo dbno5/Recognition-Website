@@ -28,159 +28,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login</title>
-<link rel="stylesheet" type="text/css" href="styles.css" />
+	<title>Login</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
-<script type="text/javascript" src="http://web.engr.oregonstate.edu/~hernandv/jquery/jquery-2.1.0.min.js"></script>
-<script>
-$(document).ready(function(){
-$('#Email').keyup(email_check);
-});
-	
-function email_check(){	
-var Email = $('#Email').val();
-if(Email == "" || Email.length < 4){
-$('#Email').css('border', '3px #CCC solid');
-$('#tick').hide();
-$('#cross').hide();
-$('.field1').hide();
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-}else{
-
-jQuery.ajax({
-   type: "POST",
-   url: "check1.php",
-   data: 'Email='+ Email,
-   cache: false,
-   success: function(response){
-if(response == 1){
-	$('#Email').css('border', '3px #090 solid');	
-	$('#cross').hide();
-	$('.field1').hide();
-	$('#tick').fadeIn();
-	}else{
-	$('#Email').css('border', '3px #C33 solid');
-	$('#tick').hide();
-	$('#cross').fadeIn();
-	$('.field1').fadeIn();
-	}
-}
-});
-}
-}
-</script>
-
-<script>
-
-$(document).ready(function(){
-$('#UserPassword').keyup(password_check);
-});
-	
-function password_check(){	
-var UserPassword = $('#UserPassword').val();
-
-if(UserPassword == "" || UserPassword.length < 4){
-$('#UserPassword').css('border', '3px #CCC solid');
-$('#tick1').hide();
-$('#cross1').hide();
-$('.field2').hide();
-
-}else{
-jQuery.ajax({
-   type: "POST",
-   url: "check2.php",
-   data: 'UserPassword='+ UserPassword,
-   cache: false,
-   success: function(response){
-if(response == 1){
-	$('#UserPassword').css('border', '3px #090 solid');	
-	$('#cross1').hide();
-	$('.field2').hide();
-	$('#tick1').fadeIn();
-	}else{
-	$('#UserPassword').css('border', '3px #C33 solid');
-	$('#tick1').hide();
-	$('#cross1').fadeIn();
-	$('.field2').fadeIn();
-
-	     }
-
-}
-});
-}
-}
-
-</script>
-
-
-
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+    
+  <div class="container">
+      <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> <?php echo $smsg; ?> </div><?php } ?>
+      <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
+      <form class="form-signin" method="POST" form action="login.php" id="signupForm">
+        <h2 class="form-signin-heading">Pyxis Awards Login</h2>
+        <div class="input-group">
+		  <span class="input-group-addon" id="basic-addon1"></span>
+		  <input type="email" name="Email" class="form-control" placeholder="Email" id="Email" required>
+		</div>
+		<div class="input-group">
+		  <span class="input-group-addon" id="basic-addon1"></span>
+		  <input type="password" name="UserPassword" class="form-control" placeholder="Password" id="UserPassword" required>
+		</div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Login</button>
+
+      </form>
+</div>  
 
 
 
 
-
-<div id="carbonForm">
-    <h1>Pyxis Awards Login</h1>
-
-    <form action="login.php" method="post" id="signupForm">
-
-        <div class="fieldContainer">
-          <div class="formRow">
-				<div class="label">
-					<label for="name">Email:</label>
-				</div>
-
-				<div class="field">
-					<input type="text" name="Email" id="Email" />
-					<img id="tick" src="tick.png" width="16" height="16"/>
-					<img id="cross" src="cross.png" width="16" height="16"/>
-				</div>
-				<div class="field1">
-						<p>Invalid Email</p>
-				</div>
-			
-			
-			</div>
-            
-            
-            <div class="formRow">
-				<div class="label">
-					<label for="name">Password:</label>
-				</div>
-
-				<div class="field">
-					<input type="UserPassword" name="UserPassword" id="UserPassword" />
-					 <img id="tick1" src="tick.png" width="16" height="16"/>
-					 <img id="cross1" src="cross.png" width="16" height="16"/>
-				</div>
-				<div class="field2">
-						<p>Incorrect Password</p>
-				</div>
-			</div>
-        
-        
-        </div>
-
-        <div class="signupButton">
-            <input type="submit" name="submit" id="submit" value="Signup" />
-        </div>
-
-    </form>
-    <p><a class="pos_fixed" href="index.php">Home</a></p>
-
+<div class="container">
+	<h4 class="form-signin"><a href="recover.php">Recover Password</a></h4>
 </div>
-<div id="carbonForm">
 
- <p>In order to login you must click on the verification email sent to your email account</p>
+    <p><a class="pos_fixed" href="index.php">Sign Up</a></p>
 
-</div>
+
 </body>
 
 </html>
-
 
 
 
