@@ -2,7 +2,7 @@
 //Turn on error reporting
 ini_set('display_errors', 'On');
 //Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","jib-db","jHLU2F6vTofAqsoU","jib-db");
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq8","hernandv-db");
 if($mysqli->connect_error){
     echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
     }
@@ -33,7 +33,7 @@ if($mysqli->connect_error){
             <ul id="navigation" class="nav navbar-nav navbar-right">
                 <li><a href="users.php">Account Management</a></li>
             	    <li><a href="export.php">Export a query as CSV</a></li>
-            	    <li><a href="reporting.php">Reporting</a></li>
+            	    <li><a href="reportHome.php">Reporting</a></li>
             </ul>
         </div>
     </nav>

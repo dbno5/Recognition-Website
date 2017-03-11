@@ -9,10 +9,10 @@
     $mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq8","hernandv-db");
     if(empty($_POST) == false && isset($_POST['add']))
     {
-        if(!($stmt = $mysqli->prepare("INSERT INTO Users(Email, FName, LName, Username, UserPassword, Signature, JobTitle, UserStatus) VALUES (?,?,?,?,?,?,?,?)"))){
+        if(!($stmt = $mysqli->prepare("INSERT INTO Users(Email, FName, LName, Username, UserPassword, Location, JobTitle, UserStatus) VALUES (?,?,?,?,?,?,?,?)"))){
             echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
         }
-        if(!($stmt->bind_param("ssssssss",$_POST['Email'],$_POST['FName'],$_POST['LName'],$_POST['Username'],$_POST['UserPassword'],$_POST['Signature'],$_POST['JobTitle'],$_POST['UserStatus']))){
+        if(!($stmt->bind_param("ssssssss",$_POST['Email'],$_POST['FName'],$_POST['LName'],$_POST['Username'],$_POST['UserPassword'],$_POST['Location'],$_POST['JobTitle'],$_POST['UserStatus']))){
             echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
         }
         if(!$stmt->execute()){
@@ -21,10 +21,10 @@
     }
     else if(empty($_POST) == false && isset($_POST['edit']))
     {
-        if(!($stmt = $mysqli->prepare("UPDATE Users SET Email=?, FName=?, LName=?, Username=?, UserPassword=?, Signature=?, JobTitle=?, UserStatus=? WHERE UserID=?"))){
+        if(!($stmt = $mysqli->prepare("UPDATE Users SET Email=?, FName=?, LName=?, Username=?, UserPassword=?, Location=?, JobTitle=?, UserStatus=? WHERE UserID=?"))){
             echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
         }
-        if(!($stmt->bind_param("ssssssssi",$_POST['Email'],$_POST['FName'],$_POST['LName'],$_POST['Username'],$_POST['UserPassword'],$_POST['Signature'],$_POST['JobTitle'],$_POST['UserStatus'],$_POST['edit']))){
+        if(!($stmt->bind_param("ssssssssi",$_POST['Email'],$_POST['FName'],$_POST['LName'],$_POST['Username'],$_POST['UserPassword'],$_POST['Location'],$_POST['JobTitle'],$_POST['UserStatus'],$_POST['edit']))){
             echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
         }
         if(!$stmt->execute()){
@@ -53,7 +53,7 @@
                 <?php
                 if(empty($_GET) == false && empty($_GET['edit']) == false)
                 {
-                    if(!($stmt = $mysqli->prepare("SELECT Email, FName, LName, Username, UserPassword, Signature, JobTitle, UserStatus FROM Users WHERE UserID=?"))){
+                    if(!($stmt = $mysqli->prepare("SELECT Email, FName, LName, Username, UserPassword, Location, JobTitle, UserStatus FROM Users WHERE UserID=?"))){
                         echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
                     }
                     if(!($stmt->bind_param("i",$_GET['edit']))){
@@ -71,14 +71,14 @@
                     echo "<input maxlength='255' name='FName' type='text' value='" . $fname . "'/>\n";
                     echo "<label class='form_label'>Last Name</label>\n";
                     echo "<input maxlength='255'name='LName' type='text' value='" . $lname .  "'/>\n";
-                     echo "<label class='form_label'>Email</label>\n";
+                    echo "<label class='form_label'>Email</label>\n";
                     echo "<input maxlength='255' name='Email' type='text' value='" . $email . "'/>\n";
                     echo "<label class='form_label'>Username</label>\n";
                     echo "<input maxlength='255' name='Username' type='text' value='" . $username . "'/>\n";
                     echo "<label class='form_label'>UserPassword</label>\n";
                     echo "<input maxlength='255' name='Password' type='text' value='" . $password . "'/>\n";
-                    echo "<label class='form_label'>Signature</label>\n";
-                    echo "<input maxlength='255' name='Signature' type='text' value='" . $signature . "'/>\n";
+                    echo "<label class='form_label'>Location</label>\n";
+                    echo "<input maxlength='255' name='Location' type='text' value='" . $signature . "'/>\n";
                     echo "<label class='form_label'>Job Title</label>\n";
                     echo "<input maxlength='255' name='JobTitle' type='text' value='" . $jobtitle . "'/>\n";
                     echo "<label class='form_label'>UserStatus</label>\n";
@@ -99,8 +99,8 @@
                     echo    "<input name='Username' type='text' />\n";
                     echo    "<label class='form_label'>Password</label>\n";
                     echo    "<input name='UserPassword' type='text' />\n";
-                    echo    "<label class='form_label'>Signature</label>\n";
-                    echo    "<input name='Signature' type='text' />\n";
+                    echo    "<label class='form_label'>Location</label>\n";
+                    echo    "<input name='Location' type='text' />\n";
                     echo    "<label class='form_label'>JobTitle</label>\n";
                     echo    "<input name='JobTitle' type='text' />\n";
                     echo    "<label class='form_label'>UserStatus</label>\n";
@@ -129,14 +129,14 @@
                 <th>Email</th>>
                 <th>Username</th>
                 <th>Password</th>
-                <th>Signature</th>      
+                <th>Location</th>      
                 <th>Job Title</th>
-                <th>User Status('Admin' or 'Normal')</th>
+                <th>User Status</th>
                 <th></th>
             </tr>
 
             <?php
-        $stmt = $mysqli->prepare("SELECT UserID, Email, FName, LName, Username, UserPassword, Signature, JobTitle, UserStatus FROM Users");
+        $stmt = $mysqli->prepare("SELECT UserID, Email, FName, LName, Username, UserPassword, Location, JobTitle, UserStatus FROM Users");
         if(!$stmt->execute())
         {
             echo "Execute failed: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
