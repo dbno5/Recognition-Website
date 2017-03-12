@@ -1,0 +1,74 @@
+\documentclass{article}
+% page layout
+\usepackage[landscape]{geometry}
+% line spacing
+\usepackage{setspace}
+% images
+\usepackage{eso-pic} % background
+\usepackage{graphicx} % import and manage
+% fonts
+\usepackage{tgschola} % TEX Gyre Schola: qcs
+\usepackage{chancery} % URW Chancery: pzc
+% input character encoding
+\usepackage[utf8]{inputenc}
+% European accented characters
+\usepackage[T1]{fontenc}
+% vertical text alignment
+\usepackage{array}
+% https://en.wikibooks.org/wiki/LaTeX/Macros
+% http://tex.stackexchange.com/questions/257128/how-does-the-newcolumntype-command-work
+% \newcolumntype{name}[number of arguments]
+% {\centering redefines \\ in way that conflicts with tabular and array environments,
+%  \arraybackslash restores meaning of \\ for use in tabular and array environments}
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+% b{'width'} paragraph column with text vertically aligned at the bottom
+\newcolumntype{V}[1]{>{\centering\arraybackslash}b{#1}}
+
+\begin{document}
+% remove page number
+\pagestyle{empty}
+% add background image
+\AddToShipoutPicture*{\includegraphics[width=\paperwidth,height=\paperheight]{images/border_week}}
+
+% \fontsize{size}{baselineskip}
+% baselineskip should be 1.2x size
+\begin{center}
+    \begin{spacing}{1}
+        \vspace{-20pt}
+        \fontfamily{pzc}\fontsize{2cm}{2.4cm}\selectfont
+        \includegraphics[width=0.65\paperwidth]{images/title_week}
+        \vspace{-70pt}
+                        
+        {\fontfamily{qcs}\fontsize{1cm}{1.2cm}\selectfont at Pyxis Corporation}
+                                        
+        {\fontfamily{pzc}\fontsize{1cm}{1.2cm}\selectfont awarded to}
+                        
+        \vspace{12pt}   
+                        
+        {\fontfamily{qcs}\fontsize{2cm}{2.4cm}\selectfont *[Recipient Name]*}
+    \end{spacing}
+\end{center}
+
+% default tabcolsep value is 6pt
+\setlength{\tabcolsep}{12pt}
+% table is float so h for here
+\begin{table}[h]
+  \centering
+  \begin{tabular} {V{0.20\paperwidth} V{0.20\paperwidth} V{0.20\paperwidth} }       
+    % \vspace{0pt} place baselines at bottom
+    % b align baselines at bottom and position content at bottom
+    % c position content at center
+    % \parbox[pos][height][contentpos]{width}{text}
+    % \phantom inserts empty box with same dimensions as argument
+    \vspace{0pt}\parbox[b][1cm][b]{5cm}{\fontfamily{pzc}\huge\selectfont \centering *[Award Date]* \\
+    \rule{5cm}{0.4pt} \\
+    \fontfamily{qcs}\normalsize\selectfont \centering Date \\
+    \phantom{Date}}                                                            &   
+    \vspace{0pt}\parbox[b][1cm][c]{5cm}{\includegraphics[width=5cm]{images/redribbon}} &   
+    \vspace{0pt}\parbox[b][1cm][b]{5cm}{\includegraphics[width=5cm]{images/rose_mofford_signature} \\
+    \rule{5cm}{0.4pt} \\
+    \fontfamily{qcs}\normalsize\selectfont \centering *[Authorizing User]* \\
+    *[Authorizing User Job Title]*}
+  \end{tabular}
+\end{table}
+\end{document}

@@ -1,0 +1,15 @@
+/*h2, .table {
+  width: 85%;
+  margin: 0px auto;
+  padding: 15px;
+}*/
+
+/* 8th through 10th children */
+#award-message, #award-table tr td:nth-child(n+7):nth-child(-n+9) {
+  text-align: center;
+}
+
+/*#award-message {
+  width: 85%;
+  margin: 15px auto;
+}*/
