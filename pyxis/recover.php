@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 'On');
 
-include 'includes/configdb-procedural.php';
+include 'includes/configdb.php';
 require('PHPMailer/PHPMailerAutoload.php');
 
 if(isset($_POST) & !empty($_POST)){

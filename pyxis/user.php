@@ -1,6 +1,49 @@
 <?php
- include('includes/header.php');
- include('includes/configdb-procedural.php');
+include('includes/header.php');
+include('includes/configdb.php');
+
+$Username = $_SESSION['user_name'];
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $FName=(isset($_POST['FName']) ? $_POST['FName'] : null);
+  $LName=(isset($_POST['LName']) ? $_POST['LName'] : null);
+  $JobTitle=(isset($_POST['JobTitle']) ? $_POST['JobTitle'] : null);
+  $Location=(isset($_POST['Location']) ? $_POST['Location'] : null);
+
+  if(!($stmt = $mysqli->prepare("UPDATE Users SET FName = ?, LName = ?, JobTitle = ?, Location = ? 
+      WHERE Username = ?"))) {
+      echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+  }
+  if(!($stmt->bind_param("sssss", $FName, $LName, $JobTitle, $Location, $Username))) {
+      echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+  }
+  if(!($stmt->execute())) {
+      echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+  }
+  else {
+      // echo "User details have been updated.";
+  }
+  $stmt->close();
+}
+
+if (!($stmt = $mysqli->prepare("SELECT FName, LName, JobTitle, Location FROM Users WHERE Username = ?"))) {
+        echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+}
+
+if(!($stmt->bind_param("s", $Username))) {
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+}
+
+if (!$stmt->execute()) {
+    echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+}
+
+if (!$stmt->bind_result($first, $last, $title, $loc)) {
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+}
+
+$stmt->fetch();
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +64,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
+    <script src="js/user.js"></script>
     <script src="js/signature.js"></script>
 
 </head>
@@ -28,53 +72,28 @@
 <?php include('includes/navbar.php'); ?>
 <div class="container">
   <h2>Edit User Details</h2>
+  <div id="redirect-message"></div>
   <p>Below you may edit existing details of your account, add a job title and location, as well as upload a signature which is required to create an award.</p>
   <form class="form-inline" action="user.php" method="post">
     <div class="form-group">
       <label for="FName">First Name:</label>
-      <input type="text" class="form-control" id="FName" placeholder="Enter First Name" name="FName">
+      <input type="text" class="form-control" id="FName" placeholder="Enter First Name" name="FName" value="<?php echo $first; ?>">
     </div>
     <div class="form-group">
       <label for="LName">Last Name:</label>
-      <input type="text" class="form-control" id="LName" placeholder="Enter Last Name" name="LName">
+      <input type="text" class="form-control" id="LName" placeholder="Enter Last Name" name="LName" value="<?php echo $last; ?>">
     </div>
     <div class="form-group">
       <label for="JobTitle">Job Title:</label>
-      <input type="text" class="form-control" id="JobTitle" placeholder="Enter Job Title" name="JobTitle">
+      <input type="text" class="form-control" id="JobTitle" placeholder="Enter Job Title" name="JobTitle" value="<?php echo $title; ?>">
     </div>
     <div class="form-group">
       <label for="Location">Location:</label>
-      <input type="text" class="form-control" id="Location" placeholder="Enter Location" name="Location">
+      <input type="text" class="form-control" id="Location" placeholder="Enter Location" name="Location" value="<?php echo $loc; ?>">
     </div>
     <button type="submit" class="btn btn-default">Update</button>
   </form>
 </div>
-
-<?php
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $Username=$_SESSION['user_name'];
-  $FName=(isset($_POST['FName']) ? $_POST['FName'] : null);
-  $LName=(isset($_POST['LName']) ? $_POST['LName'] : null);
-  $JobTitle=(isset($_POST['JobTitle']) ? $_POST['JobTitle'] : null);
-  $Location=(isset($_POST['Location']) ? $_POST['Location'] : null);
-
-  if(!mysqli_query($mysqli,"UPDATE Users SET FName = '$FName', LName ='$LName', JobTitle = '$JobTitle', Location = '$Location' WHERE Username ='$Username'")){
-      echo "Update failed: (" . $mysqli->errno . ") " . $mysqli->error; 
-  }
-
-  $result = mysqli_query($mysqli,"SELECT * FROM Users WHERE Username = '$Username' ORDER BY UserID DESC");
-
-  echo "<div class='container'>";
-  echo "<table class='table table-bordered'>"; 
-  echo "<tr><td>User ID</td><td>Email</td><td>First Name</td><td>Last Name</td><td>Username</td><td>Job Title</td><td>Location</td><td>Signature Path</td></tr>";
-
-  while($row = mysqli_fetch_array($result)) {   //Creates a loop to loop through results
-  echo "<tr><td>" . $row['UserID'] . "</td><td>" . $row['Email'] . "</td><td>" . $row['FName'] . "</td><td>" . $row['LName'] . "</td><td>" . $row['Username'] . "</td><td>" . $row['JobTitle'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Signature'] . "</td></tr>";}
-
-  echo "</table>";
-  echo "</div>";
-}
-?>
         <div><p></p></div>
         <div class="container">
         <div id="canvas">

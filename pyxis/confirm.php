@@ -1,5 +1,5 @@
 <?php
-include 'includes/configdb-procedural.php';
+include 'includes/configdb.php';
 
 $passkey = $_GET['passkey'];
 $sql = "UPDATE Users SET com_code=NULL WHERE com_code='$passkey'";

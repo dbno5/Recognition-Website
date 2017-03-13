@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-include 'includes/configdb-oop.php';
+include 'includes/configdb.php';
 
 $Username = $_SESSION['user_name'];
 

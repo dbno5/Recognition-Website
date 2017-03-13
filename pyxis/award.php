@@ -1,5 +1,7 @@
 <?php
 include('includes/header.php');
+include('includes/configdb.php');
+include('includes/fieldCheck.php');
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +23,7 @@ include('includes/header.php');
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
+    <link rel="stylesheet" type="text/css" href="CSS/styles.css" />
     <link rel="stylesheet" type="text/css" href="CSS/award.css" />
 
     <script src="js/award_script.js"></script>
@@ -42,7 +45,7 @@ include('includes/header.php');
     <input type="email" class="form-control mb-2 mr-sm-2 mb-sm-0" name="Email" placeholder="Email Address" required>
     <input type="datetime-local" class="form-control mb-2 mr-sm-2 mb-sm-0" name="AwardCreationTime" required><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Date and time when the award was granted"></span>
     <button type="submit" class="btn btn-primary">
-      <span class="glyphicon glyphicon-plus"></span> Add Award
+      <span class="glyphicon glyphicon-plus"></span>
     </button>
 </form>
 

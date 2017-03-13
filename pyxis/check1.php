@@ -1,5 +1,5 @@
 <?php
-include 'includes/configdb-procedural.php';
+include 'includes/configdb.php';
 
 $Email = trim(strtolower($_POST['Email']));
 

@@ -1,6 +1,6 @@
 <?php
  session_start();
- include 'includes/configdb-procedural.php';
+ include 'includes/configdb.php';
  if(isset($_POST['submit']))
  {
   $Email = trim($_POST['Email']);
@@ -29,13 +29,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Login</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<!-- jQuery -->
+    <script
+    src="http://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
-	<link rel="stylesheet" type="text/css" href="CSS/styles.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+	  <link rel="stylesheet" type="text/css" href="CSS/styles.css">
 </head>
 <body>
     

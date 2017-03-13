@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-include 'includes/configdb-oop.php';
+include 'includes/configdb.php';
 
 if (!($stmt = $mysqli->prepare("SELECT AwardID, Type, FName, LName, Email, AwardCreationTime, FK_UserID FROM Award WHERE AwardID = ?"))) {
         echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;

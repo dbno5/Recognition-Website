@@ -1,5 +1,7 @@
 <?php
- include('includes/header.php');
+include('includes/header.php');
+include('includes/configdb.php');
+include('includes/fieldCheck.php');
 ?>
 
 <!DOCTYPE html>

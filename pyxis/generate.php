@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-include 'includes/configdb-oop.php';
+include 'includes/configdb.php';
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ $stmt->close();
 // echo $awardCreationTime . "<br>";
 // echo $creatorUserID . "<br>";
 
-if (!($stmt = $mysqli->prepare("SELECT FName, LName, JobTitle FROM Users WHERE UserID = ?"))) {
+if (!($stmt = $mysqli->prepare("SELECT FName, LName, Signature, JobTitle FROM Users WHERE UserID = ?"))) {
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 }
 
@@ -63,16 +63,12 @@ if (!$stmt->execute()) {
 	echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 }
 
-if (!$stmt->bind_result($userFName, $userLName, $userJobTitle)) {
+if (!$stmt->bind_result($userFName, $userLName, $userSignature, $userJobTitle)) {
 	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 $stmt->fetch();
 $stmt->close();
-
-// echo $userFName . "<br>";
-// echo $userLName . "<br>";
-// echo $userJobTitle . "<br>";
 
 $file_path = '';
 
@@ -88,7 +84,22 @@ $file_contents = file_get_contents($file_path);
 
 $award_temp = "*[Recipient Name]*";
 $award_replace = $recipientFName . ' ' . $recipientLName;
+
 $file_contents = str_replace($award_temp, $award_replace, $file_contents);
+
+// Determine font size to use from recipient name length
+$name_length = strlen(utf8_decode($award_replace));
+
+if ($name_length < 12) {
+	$award_temp = "*[Recipient Font Size]*";
+	$award_replace = "{2cm}{2.4cm}";
+	$file_contents = str_replace($award_temp, $award_replace, $file_contents);
+}
+else {
+	$award_temp = "*[Recipient Font Size]*";
+	$award_replace = "{1cm}{1.2cm}";
+	$file_contents = str_replace($award_temp, $award_replace, $file_contents);
+}
 
 $award_temp = "*[Award Date]*";
 $convertedDate = DateTime::createFromFormat('Y-m-d H:i:s', $awardCreationTime);
@@ -97,6 +108,10 @@ $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 
 $award_temp = "*[Authorizing User]*";
 $award_replace = $userFName . ' ' . $userLName;
+$file_contents = str_replace($award_temp, $award_replace, $file_contents);
+
+$award_temp = "*[Authorizing User Signature]*";
+$award_replace = $userSignature;
 $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 
 $award_temp = "*[Authorizing User Job Title]*";

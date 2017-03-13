@@ -1,5 +1,5 @@
 <?php
-include 'includes/configdb-procedural.php';
+include 'includes/configdb.php';
 
 $UserPassword = trim($_POST['UserPassword']);
 

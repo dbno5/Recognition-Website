@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-include 'includes/configdb-oop.php';
+include 'includes/configdb.php';
 
 if(!($stmt = $mysqli->prepare("UPDATE Award SET Type = ?, FName = ?, LName = ?, Email = ?, AwardCreationTime = ? 
     WHERE AwardID = ?"))) {

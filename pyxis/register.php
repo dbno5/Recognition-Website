@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'includes/configdb-procedural.php';
+include 'includes/configdb.php';
 if(isset($_POST['submit']))
 {
  //whether the username is blank
