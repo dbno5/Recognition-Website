@@ -54,8 +54,10 @@ else {
   <td><button type='button' class='btn btn-danger btn-sm delete-award' id='" . $row['AwardID'] . "'>
     <span class='glyphicon glyphicon-remove'></span> Delete</button>
   </td>
-  </tr>
-  </tbody>
-  </table>";
+  </tr>";
   } 
 }
+?>
+
+</tbody>
+</table>
