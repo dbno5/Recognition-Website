@@ -24,7 +24,7 @@ $stmt->close();
 
 <form id="edit-award-form" action="process_edit_award" method="post">
     <div class="form-group">
-        <select class="form-control" name="Type">
+        <select class="form-control" name="Type" required>
         <?php
         if ($awardType == 'month') {
             echo '<option value="month" selected>Employee of the Month</option>
@@ -42,19 +42,19 @@ $stmt->close();
         </select>
     </div>
     <div class="form-group">
-        <input class="form-control" name="FName" type="text" value="<?php echo $recipientFName; ?>"/>
+        <input class="form-control" name="FName" type="text" value="<?php echo $recipientFName; ?>" required>
     </div>
     <div class="form-group">
-        <input class="form-control" name="LName" type="text" value="<?php echo $recipientLName; ?>"/>
+        <input class="form-control" name="LName" type="text" value="<?php echo $recipientLName; ?>" required>
     </div>
     <div class="form-group">
-        <input class="form-control" name="Email" type="email" value="<?php echo $recipientEmail; ?>"/>
+        <input class="form-control" name="Email" type="email" value="<?php echo $recipientEmail; ?>" required>
     </div>
     <?php
     $formattedDate = DateTime::createFromFormat('Y-m-d H:i:s', $awardCreationTime);
     ?>
     <div class="form-group">
-        <input class="form-control" name="AwardCreationTime" type="datetime-local" value="<?php echo $formattedDate->format('Y-m-d\TH:i:s'); ?>"/>
+        <input class="form-control" name="AwardCreationTime" type="datetime-local" value="<?php echo $formattedDate->format('Y-m-d\TH:i:s'); ?>" required>
     </div>
     <input type="hidden" name="AwardID" value="<?php echo $awardID; ?>" />
     <button type="submit" class="btn btn-primary" name="submit">Update</button>

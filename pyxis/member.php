@@ -22,12 +22,11 @@ include('includes/fieldCheck.php');
 
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
     <script src="js/signature.js"></script>
-
 </head>
 <body>
 <?php include('includes/navbar.php'); ?>
 <div class="container">
-<h2>Welcome <?php echo "".$_SESSION['user_name'];?> to the Pyxis Employee Recognition website!</h2>
+<h2>Welcome <?php echo "" . $_SESSION['user_name']; ?> to the Pyxis Employee Recognition website!</h2>
 <p>
 This site allows you to create recognition awards that can be emailed to employees. You will also be able to edit and delete awards previously given as well as view and edit your user details that were entered upon account creation.</p>
 </div>

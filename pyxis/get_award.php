@@ -39,22 +39,24 @@ else {
 </thead>
 <tbody>';
 
-  while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
-  echo "<tr>
-  <td>" . $row['AwardID'] . "</td>
-  <td>" . $row['Type'] . "</td>
-  <td>" . $row['FName'] . "</td>
-  <td>" . $row['LName'] . "</td>
-  <td>" . $row['Email'] . "</td>
-  <td>" . $row['AwardCreationTime'] . "</td>
-  <td><a href='generate.php?id=" . $row['AwardID'] . "' target='_blank'>Generate Award</a></td>
-  <td><button type='button' class='btn btn-default btn-sm edit-award' data-toggle='modal' data-target='#edit-modal' data-id='" . $row['AwardID'] . "'>
-    <span class='glyphicon glyphicon-pencil'></span> Edit</button>
-  </td>
-  <td><button type='button' class='btn btn-danger btn-sm delete-award' id='" . $row['AwardID'] . "'>
-    <span class='glyphicon glyphicon-remove'></span> Delete</button>
-  </td>
-  </tr>";
+  while($row = mysqli_fetch_array($result)) {
+    $formattedDate = DateTime::createFromFormat('Y-m-d H:i:s', $row['AwardCreationTime']);
+
+    echo "<tr>
+    <td>" . $row['AwardID'] . "</td>
+    <td>" . $row['Type'] . "</td>
+    <td>" . $row['FName'] . "</td>
+    <td>" . $row['LName'] . "</td>
+    <td>" . $row['Email'] . "</td>
+    <td>" . $formattedDate->format('Y-m-d g:i A') . "</td>
+    <td><a href='generate.php?id=" . $row['AwardID'] . "' target='_blank'>Generate</a></td>
+    <td><button type='button' class='btn btn-default btn-sm edit-award' data-toggle='modal' data-target='#edit-modal' data-id='" . $row['AwardID'] . "'>
+      <span class='glyphicon glyphicon-pencil'></span> Edit</button>
+    </td>
+    <td><button type='button' class='btn btn-danger btn-sm delete-award' id='" . $row['AwardID'] . "'>
+      <span class='glyphicon glyphicon-remove'></span> Delete</button>
+    </td>
+    </tr>";
   } 
 }
 ?>

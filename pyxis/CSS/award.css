@@ -1,4 +1,8 @@
-form, .table, #award-message {
+form {
+  padding: 0px 15px 15px;
+}
+
+.table, #award-message {
   padding: 15px;
 }
 

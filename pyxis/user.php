@@ -50,7 +50,7 @@ $stmt->close();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Pyxis Recognition Awards</title>
+    <title>User Details</title>
     <!-- jQuery -->
     <script
     src="http://code.jquery.com/jquery-3.1.1.min.js"
@@ -73,7 +73,6 @@ $stmt->close();
 <div class="container">
   <h2>Edit User Details</h2>
   <div id="user-message"></div>
-  <p>Below you may edit existing details of your account, add a job title and location, as well as upload a signature which is required to create an award.</p>
   <form class="form-inline" action="user.php?update=1" method="post">
     <div class="form-group">
       <label for="FName">First Name:</label>
