@@ -72,24 +72,24 @@ $stmt->close();
 <?php include('includes/navbar.php'); ?>
 <div class="container">
   <h2>Edit User Details</h2>
-  <div id="redirect-message"></div>
+  <div id="user-message"></div>
   <p>Below you may edit existing details of your account, add a job title and location, as well as upload a signature which is required to create an award.</p>
-  <form class="form-inline" action="user.php" method="post">
+  <form class="form-inline" action="user.php?update=1" method="post">
     <div class="form-group">
       <label for="FName">First Name:</label>
-      <input type="text" class="form-control" id="FName" placeholder="Enter First Name" name="FName" value="<?php echo $first; ?>">
+      <input type="text" class="form-control" id="FName" placeholder="First Name" name="FName" value="<?php echo $first; ?>" required>
     </div>
     <div class="form-group">
       <label for="LName">Last Name:</label>
-      <input type="text" class="form-control" id="LName" placeholder="Enter Last Name" name="LName" value="<?php echo $last; ?>">
+      <input type="text" class="form-control" id="LName" placeholder="Last Name" name="LName" value="<?php echo $last; ?>" required>
     </div>
     <div class="form-group">
       <label for="JobTitle">Job Title:</label>
-      <input type="text" class="form-control" id="JobTitle" placeholder="Enter Job Title" name="JobTitle" value="<?php echo $title; ?>">
+      <input type="text" class="form-control" id="JobTitle" placeholder="Job Title" name="JobTitle" value="<?php echo $title; ?>" required>
     </div>
     <div class="form-group">
       <label for="Location">Location:</label>
-      <input type="text" class="form-control" id="Location" placeholder="Enter Location" name="Location" value="<?php echo $loc; ?>">
+      <input type="text" class="form-control" id="Location" placeholder="Location" name="Location" value="<?php echo $loc; ?>" required>
     </div>
     <button type="submit" class="btn btn-default">Update</button>
   </form>
@@ -131,7 +131,9 @@ $stmt->close();
                     if (e.lengthComputable) {
                         var percentComplete = (e.loaded / e.total) * 100;
                         console.log(percentComplete + '% uploaded');
-                        alert('Succesfully uploaded');
+                        var userMessage = $('#user-message');
+                        $(userMessage).text('User signature has been uploaded.');
+                        $(userMessage).addClass('alert alert-info');
                     }
                 };
  
