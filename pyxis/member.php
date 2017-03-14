@@ -28,12 +28,8 @@ include('includes/fieldCheck.php');
 <?php include('includes/navbar.php'); ?>
 <div class="container">
 <h2>Welcome <?php echo "".$_SESSION['user_name'];?> to the Pyxis Employee Recognition website!</h2>
-<p> 
- 
-Through this site you will be able to create recognition awards to send via email to employees. You will also be able to remove past awards given as well as view and edit your user details that were entered upon account creation. 
- 
-To get started please use the links above.</p>
+<p>
+This site allows you to create recognition awards that can be emailed to employees. You will also be able to edit and delete awards previously given as well as view and edit your user details that were entered upon account creation.</p>
 </div>
-
 </body>
 </html>
