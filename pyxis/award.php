@@ -40,8 +40,8 @@ include('includes/fieldCheck.php');
             <option value="week">Employee of the Week</option>
         </select>
     </div>
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" name="FName" placeholder="First Name" required>
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" name="LName" placeholder="Last Name" required>
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" name="FName" placeholder="First Name" maxlength="12" required>
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" name="LName" placeholder="Last Name" maxlength="12" required>
     <input type="email" class="form-control mb-2 mr-sm-2 mb-sm-0" name="Email" placeholder="Email Address" required>
     <input type="datetime-local" class="form-control mb-2 mr-sm-2 mb-sm-0" name="AwardCreationTime" required><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Date and time when the award was granted"></span>
     <button type="submit" class="btn btn-primary">
