@@ -18,26 +18,26 @@ include 'includes/configdb.php';
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	
-	<script src="js/email_script.js"></script>
+    
+    <script src="js/email_script.js"></script>
 </head>
 <body>
 
 <?php
 if (!($stmt = $mysqli->prepare("SELECT AwardID, Type, FName, LName, Email, AwardCreationTime, FK_UserID FROM Award WHERE AwardID = ?"))) {
-		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+        echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if(!($stmt->bind_param("i", $_GET['id']))) {
-	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if (!$stmt->execute()) {
-	echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if (!$stmt->bind_result($awardID, $awardType, $recipientFName, $recipientLName, $recipientEmail, $awardCreationTime, $creatorUserID)) {
-	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 $stmt->fetch();
@@ -52,19 +52,19 @@ $stmt->close();
 // echo $creatorUserID . "<br>";
 
 if (!($stmt = $mysqli->prepare("SELECT FName, LName, Signature, JobTitle FROM Users WHERE UserID = ?"))) {
-		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+        echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if(!($stmt->bind_param("i", $creatorUserID))) {
-	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if (!$stmt->execute()) {
-	echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 if (!$stmt->bind_result($userFName, $userLName, $userSignature, $userJobTitle)) {
-	echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+    echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 }
 
 $stmt->fetch();
@@ -73,10 +73,10 @@ $stmt->close();
 $file_path = '';
 
 if ($awardType == 'month') {
-	$file_path = 'certificate_month.tex';
+    $file_path = 'certificate_month.tex';
 }
 else if ($awardType == 'week') {
-	$file_path = 'certificate_week.tex';
+    $file_path = 'certificate_week.tex';
 }
 
 $temp_file = $awardID . '.tex';
@@ -91,14 +91,14 @@ $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 $name_length = strlen(utf8_decode($award_replace));
 
 if ($name_length < 12) {
-	$award_temp = "*[Recipient Font Size]*";
-	$award_replace = "{2cm}{2.4cm}";
-	$file_contents = str_replace($award_temp, $award_replace, $file_contents);
+    $award_temp = "*[Recipient Font Size]*";
+    $award_replace = "{2cm}{2.4cm}";
+    $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 }
 else {
-	$award_temp = "*[Recipient Font Size]*";
-	$award_replace = "{1cm}{1.2cm}";
-	$file_contents = str_replace($award_temp, $award_replace, $file_contents);
+    $award_temp = "*[Recipient Font Size]*";
+    $award_replace = "{1cm}{1.2cm}";
+    $file_contents = str_replace($award_temp, $award_replace, $file_contents);
 }
 
 $award_temp = "*[Award Date]*";
@@ -138,18 +138,45 @@ echo '<form id="email-award-form" action="email_award.php" method="post">
     <input type="hidden" name="recipient_first_name" value="' . $recipientFName . '" />
     <input type="hidden" name="recipient_last_name" value="' . $recipientLName . '" />
     <input type="hidden" name="recipient_email" value="' . $recipientEmail . '" />
-	</form>';
+    </form>';
 
 echo '<div id="email-message"></div>';
+?>
 
-echo '<div class="pdf-container">
-		<object width="100%" height="800px" data="'. $url . '">
-		<div class="fallback">
-			<p>The browser you are currently using does not support PDFs.</p>
-			<p>Please download the PDF to view it.</p>
-			<a href="'. $url . '">Download PDF</a>
-		</div>
-		</div></object>';
+<script>
+// http://stackoverflow.com/questions/3915634/checking-if-a-url-is-broken-in-javascript
+function UrlExists(url, cb) {
+    jQuery.ajax({
+        url:      url,
+        dataType: 'text',
+        type:     'GET',
+        complete:  function(xhr){
+            if(typeof cb === 'function')
+               cb.apply(this, [xhr.status]);
+        }
+    });
+}
+
+var url = "<?php echo $url; ?>";
+
+UrlExists(url, function(status){
+    if(status !== 200) {
+        var container = $('#pdf-container');
+        $(container).text("An error occurred while generating the PDF.");
+        $(container).addClass('alert alert-danger');
+    }
+});
+</script>
+
+<?php
+echo '<div class="pdf-container" id="pdf-container">
+        <object width="100%" height="800px" data="'. $url . '">
+        <div class="fallback">
+            <p>The browser you are currently using does not support PDFs.</p>
+            <p>Please download the PDF to view it.</p>
+            <a href="'. $url . '">Download PDF</a>
+        </div>
+        </div></object>';
 ?>
 
 </body>
