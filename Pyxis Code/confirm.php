@@ -5,7 +5,8 @@
  $result = mysqli_query($mysqli,$sql) or die(mysqli_error());
  if($result)
  {
-  echo '<div>Your account is now active. You may now <a href="login.php">Log in</a></div>';
+   echo "Your account is now active...redirecting to login.";
+   echo "<script>setTimeout(\"window.location.href = 'http://web.engr.oregonstate.edu/~hernandv/Assignment%201/Pyxis_Validation/login.php';\",1500);</script>";
 }
  else
  {

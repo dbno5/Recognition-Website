@@ -68,7 +68,7 @@
  {
   $Email = trim($_POST['Email']);
   $UserPassword = trim($_POST['UserPassword']);
-  $query = "SELECT * FROM Users WHERE Email='$Email' AND UserPassword='$UserPassword' AND UserStatus='admin' AND com_code IS NULL";
+  $query = "SELECT * FROM Users WHERE Email='$Email' AND UserPassword='$UserPassword' AND com_code IS NULL";
   $result = mysqli_query($mysqli,$query)or die(mysqli_error());
   $num_row = mysqli_num_rows($result);
   $row=mysqli_fetch_array($result);
@@ -81,9 +81,8 @@
   }
   else
          {
-   echo 'You must verify account or create account before use';
-   
-   echo '<script type="text/javascript">window.location.href="index.php";</script>';
+   echo "You must verify account or create account before use...redirecting to registration form.";
+   echo "<script>setTimeout(\"window.location.href = 'index.php';\",1500);</script>";
         die();
   }
  }}
