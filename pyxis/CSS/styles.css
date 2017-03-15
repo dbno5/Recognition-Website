@@ -1,11 +1,11 @@
 *{
-	/* Resetting the default styles of the page */
-	margin:0;
-	padding:0;
+  /* Resetting the default styles of the page */
+  margin:0;
+  padding:0;
 }
 
 html{
-	overflow:auto;
+  overflow:auto;
 }
 
 body {
@@ -63,5 +63,12 @@ a.pos_fixed {
     position: fixed;
     top: 10px;
     right: 15px;
+    color: red;
+}
+
+a.pos_fixedleft {
+    position: fixed;
+    top: 10px;
+    left: 15px;
     color: red;
 }

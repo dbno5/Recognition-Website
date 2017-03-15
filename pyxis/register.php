@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'includes/configdb.php';
+include('configdb.php');
 if(isset($_POST['submit']))
 {
  //whether the username is blank
@@ -16,21 +16,21 @@ if(isset($_POST['submit']))
   //whether the firstname is blank
  if($_POST['Username'] == '')
  {
-  $_SESSION['error']['FName'] = "User Name is required.";
+  $_SESSION['error']['FName'] = "First Name is required.";
  }
- else if (strlen($_POST['FName']) < 4)
+ else if (strlen($_POST['FName']) < 2)
  {
-  $_SESSION['error']['FName'] = "User Name must be at least 4 characters.";
+  $_SESSION['error']['FName'] = "First Name must be at least 2 characters.";
  }
  
   //whether the lastname is blank
  if($_POST['Username'] == '')
  {
-  $_SESSION['error']['LName'] = "User Name is required.";
+  $_SESSION['error']['LName'] = "Last Name is required.";
  }
  else if (strlen($_POST['LName']) < 4)
  {
-  $_SESSION['error']['LName'] = "User Name must be at least 4 characters.";
+  $_SESSION['error']['LName'] = "Last Name must be at least 2 characters.";
  }
  
  //whether the email is blank
@@ -45,7 +45,7 @@ if(isset($_POST['submit']))
   {
    //if it has the correct format whether the email has already exist
    $email= $_POST['Email'];
-   $sql1 = "SELECT * FROM Users WHERE Email = '$Email'";
+   $sql1 = "SELECT * FROM Users WHERE Email = '$email'";
    $result1 = mysqli_query($mysqli,$sql1) or die(mysqli_error());
    if (mysqli_num_rows($result1) > 0)
             {
@@ -76,8 +76,8 @@ if(isset($_POST['submit']))
  else
  {
   $Username = trim(strtolower($_POST['Username']));
-  $FName = trim(strtolower($_POST['FName']));
-  $LName = trim(strtolower($_POST['LName']));
+  $FName = trim($_POST['FName']);
+  $LName = trim($_POST['LName']);
   $Email = trim(strtolower($_POST['Email']));
   $UserPassword = trim($_POST['UserPassword']);
   $com_code = md5(uniqid(rand()));
@@ -91,14 +91,14 @@ if(isset($_POST['submit']))
    $subject = "Confirmation from Pyxis Recogntion $Username";
    $header = "Pyxis Group: Confirmation from Pyxis Recognition";
    $message = "Please click the link below to verify and activate your account. ";
-   $message .= "http://web.engr.oregonstate.edu/~channa/pyxis/confirm.php?passkey=$com_code";
+   $message .= "http://web.engr.oregonstate.edu/~hernandv/How_To/Pyxis%20Code/confirm.php?passkey=$com_code";
 
    $sentmail = mail($to,$subject,$message,$header);
 
    if($sentmail)
             {
    echo "Your Confirmation link Has Been Sent To Your Email Address...redirecting to login.";
-   echo '<script type="text/javascript">window.location.href="login.php";</script>';
+   echo "<script>setTimeout(\"window.location.href = 'login.php';\",1500);</script>";
         die();
    }
    else

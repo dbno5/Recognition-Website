@@ -1,13 +1,13 @@
 <?php
 ini_set('display_errors', 'On');
-
-include 'includes/configdb.php';
+include('configdb.php');
+$con = mysqli_connect("oniddb.cws.oregonstate.edu","hernandv-db","$myPassword","hernandv-db");
 require('PHPMailer/PHPMailerAutoload.php');
 
 if(isset($_POST) & !empty($_POST)){
-	$Username = mysqli_real_escape_string($mysqli, $_POST['Username']);
-	$sql = "SELECT * FROM Users WHERE Username = '$Username'";
-	$res = mysqli_query($mysqli, $sql);
+	$Email = mysqli_real_escape_string($con, $_POST['Email']);
+	$sql = "SELECT * FROM Users WHERE Email = '$Email'";
+	$res = mysqli_query($con, $sql);
 	$count = mysqli_num_rows($res);
 	if($count == 1){
 		$r = mysqli_fetch_assoc($res);
@@ -18,42 +18,54 @@ if(isset($_POST) & !empty($_POST)){
 		$message = "Please use this password to login " . $UserPassword;
 		$headers = "From : Pyxis Recognition";
 		if(mail($to, $subject, $message, $headers)){
-			echo "Your Password has been sent to your email id";
+			echo "Your Password has been sent to your email";
 		}else{
 			echo "Failed to Recover your password, try again";
 		}
 
 	}else{
-		echo "User name does not exist in database";
+		echo "Email does not exist in database";
 	}
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Forgot Password</title>
+	<title>Login</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
-	<link rel="stylesheet" type="text/css" href="CSS/styles.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+	<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 </head>
 <body>
-<div class="container">
-      <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> <?php echo $smsg; ?> </div><?php } ?>
-      <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
-      <form class="form-signin" method="POST">
-        <h2 class="form-signin-heading">Enter Username</h2>
-        <div class="input-group">
-		  <span class="input-group-addon" id="basic-addon1"></span>
-		  <input type="text" name="Username" class="form-control" placeholder="Username" required>
-		</div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Forgot Password</button>
+    
+ <div class="container">
 
-      </form>
-</div>
-<p><a class="pos_fixed" href="login.php">Login</a></p>
+ <form data-toggle="validator" role="form" class="form-signin" form action="recover.php" method="post">
+	 <legend> Pyxis Password Recovery </legend>
+
+  <div class="form-group has-feedback">
+
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" name="Email" id="Email" placeholder="Email" data-error="Email address is invalid" required>
+    </div>
+    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    <div class="help-block with-errors"></div>
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+</form>
+</div> 
+
+<a class="pos_fixed" href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 </body>
 </html>
