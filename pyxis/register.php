@@ -3,18 +3,8 @@ session_start();
 include('includes/configdb.php');
 if(isset($_POST['submit']))
 {
- //whether the username is blank
- if($_POST['Username'] == '')
- {
-  $_SESSION['error']['Username'] = "User Name is required.";
- }
- else if (strlen($_POST['Username']) < 4)
- {
-  $_SESSION['error']['Username'] = "User Name must be at least 4 characters.";
- }
- 
   //whether the firstname is blank
- if($_POST['Username'] == '')
+ if($_POST['FName'] == '')
  {
   $_SESSION['error']['FName'] = "First Name is required.";
  }
@@ -24,11 +14,11 @@ if(isset($_POST['submit']))
  }
  
   //whether the lastname is blank
- if($_POST['Username'] == '')
+ if($_POST['LName'] == '')
  {
   $_SESSION['error']['LName'] = "Last Name is required.";
  }
- else if (strlen($_POST['LName']) < 4)
+ else if (strlen($_POST['LName']) < 2)
  {
   $_SESSION['error']['LName'] = "Last Name must be at least 2 characters.";
  }
@@ -75,7 +65,7 @@ if(isset($_POST['submit']))
  }
  else
  {
-  $Username = trim(strtolower($_POST['Username']));
+  $Username = trim(strtolower($_POST['Email']));
   $FName = trim($_POST['FName']);
   $LName = trim($_POST['LName']);
   $Email = trim(strtolower($_POST['Email']));

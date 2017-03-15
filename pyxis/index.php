@@ -48,18 +48,7 @@ if(isset($_SESSION['error']))
  
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-	  <input type="text" pattern="^[A-Za-z]{2,}$" maxlength="15" class="form-control" name="LName" id="FName" placeholder="Last Name" data-error="Only letters and at least 2 characters long" required>
-    </div>
-    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    <div class="help-block with-errors"></div>
-  </div>
-
-
-  <div class="form-group has-feedback">
-
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-      <input type="text" pattern="[a-zA-Z0-9]{4,}$" maxlength="15" class="form-control" name="Username" id="Username" placeholder="Username"  data-error="Only letters and numbers and at least 4 characters" required>
+	  <input type="text" pattern="^[A-Za-z]{2,}$" maxlength="15" class="form-control" name="LName" id="LName" placeholder="Last Name" data-error="Only letters and at least 2 characters long" required>
     </div>
     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
     <div class="help-block with-errors"></div>
