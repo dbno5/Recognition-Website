@@ -12,7 +12,7 @@
   if( $num_row ==1 )
          {
    $_SESSION['user_name']=$row['Username'];
-   echo '<script type="text/javascript">window.location.href="http://web.engr.oregonstate.edu/~jib/index.php";</script>';
+   echo '<script type="text/javascript">window.location.href="http://web.engr.oregonstate.edu/~channa/pyxis/backendIndex.php";</script>';
         die();
    exit;
   }
