@@ -100,6 +100,10 @@ $stmt->close();
             style="position: relative; margin: 0; padding: 0; border: 1px solid #c4caac;"></canvas>
         </div>
 
+        <div class="form-group">
+        <small id="fileHelp" class="form-text text-muted">For best results, please sign near the bottom of the signature pad.</small>
+        </div>
+
         <script>
             signatureCapture();
         </script>
