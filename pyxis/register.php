@@ -91,7 +91,7 @@ if(isset($_POST['submit']))
    $subject = "Confirmation from Pyxis Recogntion $Username";
    $header = "Pyxis Group: Confirmation from Pyxis Recognition";
    $message = "Please click the link below to verify and activate your account. ";
-   $message .= "http://web.engr.oregonstate.edu/~hernandv/How_To/Pyxis%20Code/confirm.php?passkey=$com_code";
+   $message .= "http://web.engr.oregonstate.edu/~channa/pyxis/confirm.php?passkey=$com_code";
 
    $sentmail = mail($to,$subject,$message,$header);
 
