@@ -65,3 +65,10 @@ a.pos_fixed {
     right: 15px;
     color: red;
 }
+
+a.pos_fixedleft {
+    position: fixed;
+    top: 10px;
+    left: 15px;
+    color: red;
+}

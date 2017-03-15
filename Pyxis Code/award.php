@@ -68,7 +68,7 @@
       <label for="AwardCreationTime">Date Awarded:</label>
       <input type="datetime-local" class="form-control" id="AwardCreationTime" name="AwardCreationTime">
     </div>
-    <button type="submit" class="btn btn-default">Update</button>
+    <button type="submit" class="btn btn-default">Create</button>
   </form>
 </div>
 
