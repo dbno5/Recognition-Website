@@ -22,7 +22,6 @@
 
 </head>
 
-
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -38,10 +37,6 @@
     </ul>
   </div>
 </nav>
-
-
-
-
 
 <div class="container">
   <h2>Edit User Details</h2>
@@ -66,10 +61,6 @@
     <button type="submit" class="btn btn-default">Update</button>
   </form>
 </div>
-
-
-
-
 
 <?php
 ini_set('display_errors', 'On');
@@ -167,7 +158,7 @@ $stmt->close();
                     if (e.lengthComputable) {
                         var percentComplete = (e.loaded / e.total) * 100;
                         console.log(percentComplete + '% uploaded');
-                        alert('Succesfully uploaded');
+                        //alert('Succesfully uploaded');
                     }
                 };
  
