@@ -1,6 +1,6 @@
 <?php
  session_start();
- include('configdb.php');
+ include('includes/configdb.php');
  if(isset($_POST['submit']))
  {
   $Email = trim($_POST['Email']);

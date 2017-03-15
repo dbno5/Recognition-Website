@@ -1,13 +1,12 @@
 <?php
 ini_set('display_errors', 'On');
-include('configdb.php');
-$con = mysqli_connect("oniddb.cws.oregonstate.edu","hernandv-db","$myPassword","hernandv-db");
+include('includes/configdb.php');
 require('PHPMailer/PHPMailerAutoload.php');
 
 if(isset($_POST) & !empty($_POST)){
-	$Email = mysqli_real_escape_string($con, $_POST['Email']);
+	$Email = mysqli_real_escape_string($mysqli, $_POST['Email']);
 	$sql = "SELECT * FROM Users WHERE Email = '$Email'";
-	$res = mysqli_query($con, $sql);
+	$res = mysqli_query($mysqli, $sql);
 	$count = mysqli_num_rows($res);
 	if($count == 1){
 		$r = mysqli_fetch_assoc($res);
