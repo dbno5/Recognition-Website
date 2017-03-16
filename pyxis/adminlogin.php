@@ -34,7 +34,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="CSS/styles.css">
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
 	<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
