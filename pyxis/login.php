@@ -66,22 +66,31 @@
  }
  else
  {
+ 
   $Email = trim($_POST['Email']);
   $UserPassword = trim($_POST['UserPassword']);
-  $query = "SELECT * FROM Users WHERE Email='$Email' AND UserPassword='$UserPassword' AND UserStatus='' AND com_code IS NULL";
+  $query = "SELECT * FROM Users WHERE Email='$Email' AND UserPassword='$UserPassword' AND com_code IS NULL";
   $result = mysqli_query($mysqli,$query)or die(mysqli_error());
   $num_row = mysqli_num_rows($result);
   $row=mysqli_fetch_array($result);
-  if( $num_row ==1 )
-         {
+ 
+  if( $row['UserStatus'] == '' )
+  {
    $_SESSION['user_name']=$row['Username'];
-   echo '<script type="text/javascript">window.location.href="member.php";</script>';
+   echo "User login successful...redirecting to member page.";
+   echo "<script>setTimeout(\"window.location.href = 'member.php';\",1000);</script>";
         die();
    exit;
-  }
-  else
-         {
-   echo "You must verify account before use or use admin page to login...redirecting to registration form.";
+   
+   } elseif ($row['UserStatus'] == 'admin'){
+   $_SESSION['user_name']=$row['Username'];
+   echo "Admin login successful...redirecting to admin page.";
+   echo "<script>setTimeout(\"window.location.href = 'backendIndex.php';\",1000);</script>";   
+        die();
+   exit;  
+   
+   } else { 
+   echo "You must create or verify account before use...redirecting to registration form.";
    echo "<script>setTimeout(\"window.location.href = 'index.php';\",1500);</script>";
         die();
   }
@@ -150,11 +159,18 @@
 
 
     <p><a class="pos_fixed" href="index.php"><span class="glyphicon glyphicon-pencil"></span> Register</a>
-    <p><a class="pos_fixedleft" href="adminlogin.php"><span class="glyphicon glyphicon-briefcase"></span> Admin</a>
+   <!-- <p><a class="pos_fixedleft" href="adminlogin.php"><span class="glyphicon glyphicon-briefcase"></span> Admin</a> -->
 
 </body>
 
 </html>
+
+
+
+
+
+
+
 
 
 
