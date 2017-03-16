@@ -81,8 +81,6 @@
   }
   else
          {
-   echo 'You must verify account or create account before use';
-   
    echo "You must verify account before use or use admin page to login...redirecting to registration form.";
    echo "<script>setTimeout(\"window.location.href = 'index.php';\",1500);</script>";
         die();
