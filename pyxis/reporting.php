@@ -11,15 +11,14 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
+  
 $result = $mysqli->query('SELECT concat(FName, ' ', LName) as User, count(AwardID) AS sumTest FROM Award GROUP BY User');
 
   $rows = array();
   $table = array();
   $table['cols'] = array(
-   
     array('label' => 'User', 'type' => 'string'),
     array('label' => 'sumTest', 'type' => 'number'),
- 
 );
     /* Extract the information from $result */
     foreach($result as $r) {
