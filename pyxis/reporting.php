@@ -11,36 +11,15 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
-   /* select all the weekly tasks from the table googlechart */
-$result = $mysqli->query('SELECT Users.Username AS User, count(Award.AwardID) AS sumTest FROM Users LEFT JOIN Award ON Users.UserID = Award.FK_UserID group by Users.UserID');
-/*
-      ---------------------------
-      example data: Table (googlechart)
-      --------------------------
-      Weekly_Task     percentage
-      Sleep           30
-      Watching Movie  10
-      job             40
-      Exercise        20       
-  */
+$result = $mysqli->query('SELECT concat(FName, ' ', LName) as User, count(AwardID) AS sumTest FROM Award GROUP BY User');
+
   $rows = array();
   $table = array();
   $table['cols'] = array(
-    // Labels for your chart, these represent the column titles.
-    /* 
-        note that one column is in "string" format and another one is in "number" format 
-        as pie chart only required "numbers" for calculating percentage 
-        and string will be used for Slice title
-    */
+   
     array('label' => 'User', 'type' => 'string'),
     array('label' => 'sumTest', 'type' => 'number'),
-   /* array('label' => 'LName', 'type' => 'string'),
-    array('label' => 'Username', 'type' => 'string'),
-    array('label' => 'UserPassword', 'type' => 'string'),
-    array('label' => 'Signature', 'type' => 'string'),
-    array('label' => 'JobTitle', 'type' => 'string'),
-    array('label' => 'UserStatus', 'type' => 'string')
-*/
+ 
 );
     /* Extract the information from $result */
     foreach($result as $r) {
