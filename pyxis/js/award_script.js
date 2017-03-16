@@ -130,6 +130,7 @@ $(document).on('click', '.delete-award', function() {
   saveAward.lName = saveRow.children('td:nth-child(4)').text();
   saveAward.email = saveRow.children('td:nth-child(5)').text();
   saveAward.date = saveRow.children('td:nth-child(6)').text();
+  saveAward.date = moment(saveAward.date).format('YYYY-MM-DD HH:mm:ss');
 
   $.ajax({
     // Pass context so can access in success callback
