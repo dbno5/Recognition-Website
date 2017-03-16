@@ -12,7 +12,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq
     exit();
   }
   
-$result = $mysqli->query('SELECT concat(FName, ' ', LName) as User, count(AwardID) AS sumTest FROM Award GROUP BY User');
+$result = $mysqli->query('SELECT concat(FName, " ", LName) as User, count(AwardID) AS sumTest FROM Award GROUP BY User');
 
   $rows = array();
   $table = array();
