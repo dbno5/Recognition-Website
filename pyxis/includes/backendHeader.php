@@ -1,4 +1,10 @@
 <?php
+session_start();
+if($_SESSION['user_name'] == '') {
+    header("Location: index.php");
+    exit;
+}
+
 //Turn on error reporting
 ini_set('display_errors', 'On');
 //Connects to the database
