@@ -40,6 +40,7 @@ if($mysqli->connect_error){
                 <li><a href="users.php">Account Management</a></li>
             	    <li><a href="export.php">Export a query as CSV</a></li>
             	    <li><a href="reportHome.php">Reporting</a></li>
+                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
