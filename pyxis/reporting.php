@@ -18,7 +18,7 @@ $result = $mysqli->query('SELECT concat(FName, ' ', LName) as User, count(AwardI
   $table = array();
   $table['cols'] = array(
     array('label' => 'User', 'type' => 'string'),
-    array('label' => 'sumTest', 'type' => 'number'),
+    array('label' => 'sumTest', 'type' => 'number')
 );
     /* Extract the information from $result */
     foreach($result as $r) {
