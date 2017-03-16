@@ -1,17 +1,7 @@
-    
 <?php
- session_start();
- if($_SESSION['user_name'] == '')
- {
-  header("Location: index.php");
-  exit;
- }
+$pageTitle = "Users";
+include("includes/backendHeader.php");
 ?>
-
-<?php
-        $pageTitle = "Users";
-        include("includes/backendHeader.php");
-    ?>
 
     <?php
     $address = '"users.php"';
