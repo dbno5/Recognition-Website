@@ -11,7 +11,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","hernandv-db","J9RlSghRw6FKvLq
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
- $result = $mysqli->query('SELECT Users.Location AS Location, count(Award.AwardID) AS numUsers FROM Users LEFT JOIN Award ON Users.UserID = Award.FK_UserID group by Users.Location');
+ $result = $mysqli->query('SELECT Users.Location AS Location, count(Award.AwardID) AS numUsers FROM Users LEFT JOIN Award ON Users.Email = Award.Email group by Location');
   
   $rows = array();
   $table = array();
